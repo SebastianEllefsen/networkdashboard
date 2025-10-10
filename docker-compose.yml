@@ -27,11 +27,10 @@ services:
       - prometheus
     restart: unless-stopped
 
-  # 3. Node Exporter (For å overvåke Macen din!)
+  # 3. Node Exporter
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
-    # Disse volummountene er nødvendige for at Node Exporter skal kunne lese systemdata fra Macens operativsystem
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
