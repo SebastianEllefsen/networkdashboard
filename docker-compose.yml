@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # 1. Prometheus Server
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -14,6 +15,7 @@ services:
       - '9090:9090'
     restart: unless-stopped
 
+  # 2. Grafana Server
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -25,13 +27,21 @@ services:
       - prometheus
     restart: unless-stopped
 
-  snmp-exporter:
-    image: prom/snmp-exporter:latest
-    container_name: snmp-exporter
-    ports:
-      - '9366:9366'
+  # 3. Node Exporter (For å overvåke Macen din!)
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    # Disse volummountene er nødvendige for at Node Exporter skal kunne lese systemdata fra Macens operativsystem
     volumes:
-      - ./snmp-exporter/snmp.yml:/etc/snmp_exporter/snmp.yml
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host)($$|/)'
+    ports:
+      - '9100:9100'
     restart: unless-stopped
 
 volumes:
