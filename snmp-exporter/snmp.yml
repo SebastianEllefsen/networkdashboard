@@ -1,0 +1,6 @@
+modules:
+  if_mib:
+    walk: [sysUpTime, ifXTable]
+    # Her setter du community string (passord) for SNMP v2c
+    auth:
+      community: SKOLE_SNMP_PASSORD
