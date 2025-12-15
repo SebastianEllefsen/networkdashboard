@@ -1,0 +1,44 @@
+{
+  "id": null,
+  "uid": "network-overview",
+  "title": "Network Overview",
+  "tags": ["network", "monitoring"],
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "CPU Load (1m)",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "node_load1",
+          "legendFormat": "{{instance}}",
+          "interval": ""
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "type": "graph",
+      "title": "Interface Traffic (bits/s)",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "rate(ifInOctets[5m]) * 8",
+          "legendFormat": "In {{device}}",
+          "interval": ""
+        },
+        {
+          "expr": "rate(ifOutOctets[5m]) * 8",
+          "legendFormat": "Out {{device}}",
+          "interval": ""
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+    }
+  ],
+  "templating": { "list": [] }
+}
