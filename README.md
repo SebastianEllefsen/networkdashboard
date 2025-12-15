@@ -1,6 +1,6 @@
 # networkdashboard
 prøve examen it tverfaglig
-# planlegnings dokument av chat gpt
+# planlegnings dokument
 Mål:
 Implementere et nettverksovervåkningsdashboard som kontinuerlig overvåker og rapporterer status for alle kritiske nettverkskomponenter ved skolen, for å sikre høy nettverkstilgjengelighet og ytelse.
 
